@@ -10,7 +10,9 @@ lazy val root = (project in file("."))
     name := "weatherbanno",
     version := "0.0.1-SNAPSHOT",
     scalaVersion := "2.12.15",
+    scalacOptions += "-Ypartial-unification",
     libraryDependencies ++= Seq(
+      "com.snowplowanalytics" %% "scala-weather" % "0.5.0",
       "org.http4s"      %% "http4s-ember-server" % Http4sVersion,
       "org.http4s"      %% "http4s-ember-client" % Http4sVersion,
       "org.http4s"      %% "http4s-circe"        % Http4sVersion,
@@ -21,7 +23,7 @@ lazy val root = (project in file("."))
       "ch.qos.logback"  %  "logback-classic"     % LogbackVersion,
       "org.scalameta"   %% "svm-subs"            % "20.2.0"
     ),
-    addCompilerPlugin("org.typelevel" %% "kind-projector"     % "0.13.0" cross CrossVersion.full),
+    addCompilerPlugin("org.typelevel" %% "kind-projector"     % "0.13.2" cross CrossVersion.full),
     addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.3.1"),
     testFrameworks += new TestFramework("munit.Framework")
   )

@@ -7,25 +7,13 @@ import org.http4s.dsl.Http4sDsl
 
 object WeatherbannoRoutes {
 
-  def jokeRoutes[F[_]: Sync](J: Jokes[F]): HttpRoutes[F] = {
+  def weatherRoutes[F[_]: Sync](w: Weather[F]): HttpRoutes[F] = {
     val dsl = new Http4sDsl[F]{}
     import dsl._
     HttpRoutes.of[F] {
-      case GET -> Root / "joke" =>
+      case GET -> Root / "weather" / "lat" / lat / "lon" / lon =>
         for {
-          joke <- J.get
-          resp <- Ok(joke)
-        } yield resp
-    }
-  }
-
-  def helloWorldRoutes[F[_]: Sync](H: HelloWorld[F]): HttpRoutes[F] = {
-    val dsl = new Http4sDsl[F]{}
-    import dsl._
-    HttpRoutes.of[F] {
-      case GET -> Root / "hello" / name =>
-        for {
-          greeting <- H.hello(HelloWorld.Name(name))
+          greeting <- w.weather(Weather.Coords(lat.toDouble, lon))
           resp <- Ok(greeting)
         } yield resp
     }
