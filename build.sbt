@@ -12,7 +12,6 @@ lazy val root = (project in file("."))
     scalaVersion := "2.12.15",
     scalacOptions += "-Ypartial-unification",
     libraryDependencies ++= Seq(
-      "com.snowplowanalytics" %% "scala-weather" % "0.5.0",
       "org.http4s"      %% "http4s-ember-server" % Http4sVersion,
       "org.http4s"      %% "http4s-ember-client" % Http4sVersion,
       "org.http4s"      %% "http4s-circe"        % Http4sVersion,
